@@ -2,18 +2,13 @@ import {
     Box, 
     Flex, 
     Image, 
-    // Heading, 
-    // Input, 
-    // Button, 
-    // Stack, 
-    // Text,
-    // Separator,
-
-    // VStack
 } from '@chakra-ui/react';
 import React from 'react';
 
 import mainPageImage from '../assets/mainPage.jpg'; 
+
+// import TestForm from './Testform';
+import SignInForm from './SignInForm';
 
 const MainSection = () => {
   return (
@@ -24,14 +19,23 @@ const MainSection = () => {
         direction={{ base: 'column', md: 'row' }} 
       >
         {/* Left Section - Image */}
-        <Box flex="1" mb={{ base: 6, md: 0 }} textAlign="center">
-          <Image
-            src={mainPageImage} 
-            alt="Homepage Illustration"
-            boxSize="100%" 
-            objectFit="cover" 
-          />
-        </Box>
+
+          <Box 
+            flex="1" 
+            // mb={{ base: 6, md: 0 }} 
+            textAlign="center"
+            // display={{base: 'none', md: 'block'}}
+            hideBelow="md"
+          >
+            <Image
+              src={mainPageImage} 
+              alt="Homepage Illustration"
+              maxH="500px"
+              // boxSize="100%" 
+              objectFit="cover" 
+            />
+          </Box>
+        
 
         {/* Right Section - Login Form */}
         <Box 
@@ -48,9 +52,10 @@ const MainSection = () => {
           boxShadow="lg" 
           textAlign="center"
         >
-              
+          <SignInForm />
         </Box>
       </Flex>
+
     </Box>
   );
 };

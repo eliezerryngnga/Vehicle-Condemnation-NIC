@@ -1,33 +1,33 @@
 import React from "react";
 import {
-  FormControl,
-  FormErrorMessage,
-  FormLabel,
+  Field,
   Input,
 } from '@chakra-ui/react';
+import { Field as FormikField } from "formik";
 
-import { Field } from "formik";
-
-const InputField = ({ name, label, isRequired = true, ...others }) => {
+const InputField = ({ name, label, required=true, type="text", ...others }) => {
   return (
-    <Field name={name}>
+    <FormikField name={name}>
       {({ field, meta }) => (
-        <FormControl
-          isRequired={isRequired}
-          isInvalid={meta.error && meta.touched}
+
+        <Field.Root 
+        required={required}
+        invalid = {meta.error && meta.touched}
         >
-          <FormLabel htmlFor={name}>{label}</FormLabel>
+          <Field.Label color="black" htmlFor={name}>
+            {label}
+           <span style={{ color: "red" }}>*</span> 
+          </Field.Label>
           <Input
-            type="text"
-            // variant="brand"
+            type={type}
             id={name}
             {...field}
             {...others}
           />
-          <FormErrorMessage>{meta.error}</FormErrorMessage>
-        </FormControl>
+          <Field.ErrorText>{meta.error}</Field.ErrorText>
+        </Field.Root>
       )}
-    </Field>
+    </FormikField>
   );
 };
 

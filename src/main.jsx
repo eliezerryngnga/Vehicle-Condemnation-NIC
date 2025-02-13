@@ -4,12 +4,13 @@ import './index.css'
 import App from './App.jsx'
 
 import { Provider } from './components/ui/provider'
-// import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter } from "react-router-dom";
 
 import "@fontsource/david-libre"
 
 import "material-icons/iconfont/material-icons.css";
+
 // import { pdfjs } from "react-pdf";
 
 
@@ -18,16 +19,16 @@ import "material-icons/iconfont/material-icons.css";
 //   import.meta.url
 // ).toString();
 
-// const queryClient = new QueryClient();
+const queryClient = new QueryClient();
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    {/* <QueryClientProvider client={queryClient}> */}
+    <QueryClientProvider client={queryClient}>
       <BrowserRouter>
       <Provider>
           <App />
         </Provider>
       </BrowserRouter>
-    {/* </QueryClientProvider> */}
+    </QueryClientProvider>
   </StrictMode>,
 )

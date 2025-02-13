@@ -1,17 +1,18 @@
 import React, { useState } from "react";
 import {
-  FormControl,
-  FormErrorMessage,
-  FormLabel,
   IconButton,
   Input,
-  InputGroup,
-  InputRightElement,
+  Field,
+  Box,
+  HStack,
 } from "@chakra-ui/react";
-import { Field } from "formik";
-import { FiEye, FiEyeOff } from "react-icons/fi";
 
-const PasswordField = ({ name, label, isRequired = true, ...others }) => {
+import { Field as FormikField } from "formik";
+
+import { FiEye, FiEyeOff } from "react-icons/fi";
+import { InputGroup } from "@/components/ui/input-group";
+
+const PasswordField = ({ name, label, required=true, ...others }) => {
   // States
   const [show, setShow] = useState(false);
 
@@ -20,30 +21,39 @@ const PasswordField = ({ name, label, isRequired = true, ...others }) => {
     setShow((prev) => !prev);
   };
   return (
-    <Field name={name}>
+    <FormikField name={name}>
       {({ field, meta }) => (
-        <FormControl
-          isRequired={isRequired}
-          isInvalid={meta.error && meta.touched}
+        
+        <Field.Root
+          required={required}
+          invalid = {meta.error && meta.touched}
         >
-          <FormLabel htmlFor={name}>{label}</FormLabel>
-          <InputGroup>
+          <Field.Label color="black" htmlFor={name}> 
+            {label}
+           <span style={{ color: "red" }}>*</span>
+          </Field.Label>
+
+        <HStack gap="10" width="full">
+          <InputGroup flex="1">
+          <>
             <Input
               type={show ? "text" : "password"}
               id={name}
               {...field}
               {...others}
             />
-            <InputRightElement>
-              <IconButton size="sm" variant="ghost" onClick={handleClick}>
-                {show ? <FiEyeOff size={20} /> : <FiEye size={20} />}
-              </IconButton>
-            </InputRightElement>
+            <IconButton size="sm" variant="ghost" onClick={handleClick}>
+              {show ? <FiEyeOff size={20} /> : <FiEye size={20} />}
+            </IconButton>
+          </>
           </InputGroup>
-          <FormErrorMessage>{meta.error}</FormErrorMessage>
-        </FormControl>
+        </HStack>
+          
+
+          <Field.ErrorText>{meta.error}</Field.ErrorText>
+        </Field.Root>
       )}
-    </Field>
+    </FormikField>
   );
 };
 
