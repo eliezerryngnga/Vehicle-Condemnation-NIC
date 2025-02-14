@@ -1,29 +1,39 @@
 import React, { useEffect, useRef } from "react";
+
 import {
   Box,
   Button,
-  Divider,
   Heading,
   IconButton,
   Image,
-  Link,
+
+  Separator,
   Skeleton,
   Stack,
-  Text,
-  Tooltip,
-  useToast,
+  // useToast,
 } from "@chakra-ui/react";
-import { Form, Formik } from "formik";
+
+import { useToast } from '@chakra-ui/toast';
+
+import { Tooltip } from "../../components/ui/tooltip";
+
+import { Form, Formik  } from "formik";
+
 import * as yup from "yup";
+
 import InputField from "../../components/core/formik/InputField";
 import PasswordField from "../../components/core/formik/PasswordField";
+
 import { Link as RouterLink, useNavigate } from "react-router-dom";
+
 import {
   useAuthenticateUser,
   useFetchRefreshCaptcha,
   useGetPublicKey,
 } from "../../hooks/authQueries";
-import { MdOutlineRefresh } from "react-icons/md";
+
+import { MdOutlineRefresh } from 'react-icons/md';
+
 import { encryptRSA } from "../../components/utils/security";
 
 const SignInForm = () => {
@@ -115,6 +125,7 @@ const SignInForm = () => {
   };
 
   useEffect(() => {
+  
     if (captchaQuery.isSuccess) {
       formikRef.current.setFieldValue(
         "captchaToken",
@@ -133,22 +144,29 @@ const SignInForm = () => {
       {(formik) => (
         <Stack as={Form} spacing={4}>
           <Stack>
-            <Heading size="md">Login</Heading>
+            <Heading size="md" color="black">Login</Heading>
           </Stack>
 
-          <InputField
-            type="text"
-            name="username"
-            label="Username"
-            placeholder="Ex. user1"
-          />
+          <Separator />
 
-          <PasswordField
-            name="password"
-            label="Password"
-            placeholder="Minimum 8 characters"
-          />
+            <InputField
+              type="text"
+              color="black"
+              label="Username"
+              name="username"
+              placeholder="Ex. user1"
+            />
 
+           
+              <PasswordField
+                label="Password"
+                name="password"
+                color="black"
+                placeholder="Minimum 8 characters"
+              />
+
+          
+          {/* Captcha Image Box */}
           <Box
             pos="relative"
             border="1px"
@@ -169,19 +187,23 @@ const SignInForm = () => {
                 h="full"
               />
             </Skeleton>
+            
             <Tooltip label="Refresh Captcha">
               <IconButton
                 variant="brand"
-                icon={<MdOutlineRefresh size={20} />}
+                bg="#005468"
+                icon={<MdOutlineRefresh size={20} color="blue"/>}
                 pos="absolute"
                 top={2}
                 right={2}
                 onClick={() => captchaQuery.refetch()}
-              />
+                aria-label="Refresh-Captcha"
+             />
             </Tooltip>
           </Box>
 
-          <InputField
+          {/* Captcha Field */}
+          <InputField 
             name="captcha"
             label="Captcha"
             placeholder="Enter the captcha above"
@@ -192,11 +214,10 @@ const SignInForm = () => {
             variant="brand"
             isLoading={authenticateQuery.isPending}
             loadingText="Loading"
+            bg="#005468"
           >
             Sign In
           </Button>
-
-          <Divider />
 
         </Stack>
       )}

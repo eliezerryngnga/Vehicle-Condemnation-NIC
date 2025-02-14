@@ -1,8 +1,8 @@
 import { Box, Flex, Text, Image } from '@chakra-ui/react';
 import React from 'react';
 
-import digitalIndia from '../assets/digital.png'; // Replace with your actual image paths
-import NIC_Logo from '../assets/Nic_logo2-01.png'; // Replace with your actual image paths
+import digitalIndia from '../../assets/digital.png'; // Replace with your actual image paths
+import NIC_Logo from '../../assets/Nic_logo2-01.png'; // Replace with your actual image paths
 
 const Footer = () => {
     return (

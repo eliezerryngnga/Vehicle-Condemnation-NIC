@@ -3,16 +3,18 @@ import {
   IconButton,
   Input,
   Field,
-  Box,
   HStack,
 } from "@chakra-ui/react";
 
-import { Field as FormikField } from "formik";
 
-import { FiEye, FiEyeOff } from "react-icons/fi";
+import { useField } from "formik";
+
+import  CustIconButton from "../CustomIconButtons/CustIconButton";
+
 import { InputGroup } from "@/components/ui/input-group";
 
 const PasswordField = ({ name, label, required=true, ...others }) => {
+
   // States
   const [show, setShow] = useState(false);
 
@@ -20,10 +22,10 @@ const PasswordField = ({ name, label, required=true, ...others }) => {
   const handleClick = () => {
     setShow((prev) => !prev);
   };
+
+  const [field, meta] = useField(name);
+
   return (
-    <FormikField name={name}>
-      {({ field, meta }) => (
-        
         <Field.Root
           required={required}
           invalid = {meta.error && meta.touched}
@@ -33,27 +35,22 @@ const PasswordField = ({ name, label, required=true, ...others }) => {
            <span style={{ color: "red" }}>*</span>
           </Field.Label>
 
-        <HStack gap="10" width="full">
-          <InputGroup flex="1">
-          <>
-            <Input
-              type={show ? "text" : "password"}
-              id={name}
-              {...field}
-              {...others}
-            />
-            <IconButton size="sm" variant="ghost" onClick={handleClick}>
-              {show ? <FiEyeOff size={20} /> : <FiEye size={20} />}
-            </IconButton>
-          </>
-          </InputGroup>
-        </HStack>
-          
+          <HStack gap="10" w="full">
+            <InputGroup
+              flex="1"
+              endElement={<CustIconButton />}
+            >
+              <Input 
+                type={show ? "text" : "password"}
+                id={name}
+                {...field}
+                {...others}
+              />
+            </InputGroup>
+          </HStack>
 
           <Field.ErrorText>{meta.error}</Field.ErrorText>
         </Field.Root>
-      )}
-    </FormikField>
   );
 };
 

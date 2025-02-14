@@ -3,15 +3,14 @@ import {
   Field,
   Input,
 } from '@chakra-ui/react';
-import { Field as FormikField } from "formik";
+
+import { useField } from "formik";
 
 const InputField = ({ name, label, required=true, type="text", ...others }) => {
-  return (
-    <FormikField name={name}>
-      {({ field, meta }) => (
+  const [field, meta] = useField(name);
 
+  return (
         <Field.Root 
-        required={required}
         invalid = {meta.error && meta.touched}
         >
           <Field.Label color="black" htmlFor={name}>
@@ -21,13 +20,12 @@ const InputField = ({ name, label, required=true, type="text", ...others }) => {
           <Input
             type={type}
             id={name}
+            required={required}
             {...field}
             {...others}
           />
           <Field.ErrorText>{meta.error}</Field.ErrorText>
         </Field.Root>
-      )}
-    </FormikField>
   );
 };
 

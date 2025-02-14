@@ -11,9 +11,9 @@ import {
 import { Link as RouterLink } from 'react-router-dom';
 import React from 'react';
 
-import megEmblem from '../assets/meg_emblem.png';
+import megEmblem from '../../../assets/meg_emblem.png';
 
-const HomeNavbar = () => {
+const GuestNavbar = () => {
     const links = [
         { label: "Home", path: "/" },
         { label: "Contact Us", path: "/contact-us" },
@@ -63,4 +63,4 @@ const HomeNavbar = () => {
     );
 };
 
-export default HomeNavbar;
+export default GuestNavbar;
