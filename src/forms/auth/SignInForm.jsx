@@ -168,16 +168,18 @@ const SignInForm = () => {
           
           {/* Captcha Image Box */}
           <Box
-            pos="relative"
-            border="1px"
-            borderColor="border"
-            rounded="md"
-            overflow="hidden"
+            // pos="relative"
+            // border="1px"
+            // borderColor="border"
+            // rounded="md"
+            // overflow="hidden"
           >
             <Skeleton
               isLoaded={!captchaQuery.isPending}
               h={100}
               fadeDuration={1}
+
+              bg="grey"
             >
               <Image
                 src={captchaQuery?.data?.data?.captchaImage}
